@@ -82,3 +82,4 @@ fabric.properties
 build/
 logs/
 test-output/
+/target/
