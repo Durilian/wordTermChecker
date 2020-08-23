@@ -11,13 +11,14 @@
  7. [How to run - non-technical](#how-to-run---non-technical)
  8. [How to run - technical](#how-to-run---technical)
  9. [About me / contact](#about-me--contact)
-###Wstęp
+ 
+### Wstęp
 Cześć wszystkim<br>
 Jestem Marek i jestem testerem, poza pracą mam Dziewczynę Patrycję i to w sumie dzięki niej teraz czytacie ten wstęp.
 
 Tak się składa, że Patrycja jest w trakcie zdawania na prawo jazdy, a że z terminami bywa różnie postanowiłem wspomóc ją z moimi zawodowymi umiejętnościami.
 
-###Do czego to służy
+### Do czego to służy
 Powyższy projekt uruchamia przeglądarkę i co zadany czas sprawdza 
 w wybranych przez nas miastach czy dostępny jest termin egzaminu spełniający nasze kryteria.
 W przypadku znalezienia wolnego terminu wysłane na podane przez nas dane (ID) powiadomienie push przez aplikację 
@@ -28,12 +29,12 @@ to użycia danych wrażliwych jak np. pesel czy numer profilu kandydata. <br>
 **UWAGA:** Program do działania wymaga danych do konta info-car (mail/hasło) i nigdzie więcej te dane nie są używane/zapisywane. 
 Jeśli boisz się o swoje dane to zalecam założyć dedykowane konto info-car z innym hasłem tylko na potrzeby tej aplikacji.
 
-###Jak to uruchomić - osoby nietechniczne
+### Jak to uruchomić - osoby nietechniczne
 1. Pobrać i zainstalować: [JAVA](https://www.java.com/pl/download/) (wersja 11 lub nowsza)
 2. Pobrać i zainstalować: [aplikację WirePusher](https://play.google.com/store/apps/details?id=com.mrivan.wirepusher) do powiadomień (Android only)
 3. Pobrać i uruchomić ten program w postaci pliku JAR
 
-###Jak to uruchomić - osoby techniczne:
+### Jak to uruchomić - osoby techniczne:
 1. Pobrać repozytorium i zbudować projekt (wymaga Java 11+)
 2. Ustawić wartości dla [konfiguracji](src/main/resources/configuration/configuration.properties)
 3. Uruchomić jeden z dwóch trybów:
@@ -45,7 +46,7 @@ Oba tryby powinny działać identycznie i działają używając testu z drugiego
 ### Kontakt
 Jeśli masz uwagi, pomysły, bugi, bądź po prostu chciałbyś wyrazić swoją opinie to zapraszam do kontaktu pod mafikrpg@gmail.com
 
-###Hello everyone!
+### Hello everyone!
 
 I made this project for my girlfriend which is currently trying to get a driving license. But the terms for the exam are very long. So I made this checker for her and then decided to make it public.
 
@@ -67,12 +68,12 @@ I have decided to write it as well as my programmatic skills allow me to. So if 
 
 I am open to suggestions and criticism as I want to use this project to develop my programming skills.
 
-###How to run - non-technical
+### How to run - non-technical
 1. Download and install:  [JAVA](https://www.java.com/en/download/) (version 11 or higher)
 2. Download and install:  [WirePusher app](https://play.google.com/store/apps/details?id=com.mrivan.wirepusher) for pushes (Android only)
 3. Download and run this program from JAR file
 
-###How to run - technical
+### How to run - technical
 1. Download and build project (Java 11+)
 2. Set values in [configuration](src/main/resources/configuration/configuration.properties)
 3. Run one of the two runners
