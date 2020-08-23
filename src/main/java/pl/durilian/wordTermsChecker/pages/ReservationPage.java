@@ -16,7 +16,6 @@ import static com.codeborne.selenide.Selenide.$$;
 @Log4j2
 public class ReservationPage extends AbstractBasePage<ReservationPage> {
     public final static String URI = "/infocar/konto/word/rezerwacja.html";
-    final static String availableColor = "rgba(34, 34, 34, 1)";
     //locators
     final private SelenideElement reserveTermButtonBeforeLogin = $(byId("rt"));
     final private SelenideElement reserveTermButtonAfterLogin = $(".redBtn");
@@ -32,7 +31,7 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
     final private ElementsCollection examCategories = $$(".examCategory");
     final private ElementsCollection wordSelectLinks = $$(".wordSelectButton");
 
-    final private String examTypeLocator = "//div[contains(text(),'%s')]";
+    final private String availableExamTypeLocator = "//td[not(@class='notAvailable')]//div[contains(text(), '%s')]";
 
     final private int VOIVODESHIP_SELECT_INDEX = 0;
     final private int CITY_SELECT_INDEX = 1;
@@ -111,8 +110,9 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
 
     /**
      * <pre>
-     * Method checking currently opened day for free terms in desired exam type.
-     * Checks the type by RGB color matching: "rgba(34, 34, 34, 1)" means checked hour is available
+     * Method checking currently opened day for free terms
+     * in desired exam type.
+     * Checks if the cell has not class "notavailable"
      * Found free term is logged as fatal level so it goes to additional
      * log file: yyyy-MM-dd-wolneTerminy.log
      * </pre>
@@ -124,9 +124,8 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
     private boolean checkSingleDay(String city, Exam exam) {
         log.trace("Sprawdzam dostępne godziny");
 
-        String desiredExamTypeLocator = String.format(examTypeLocator, exam.getExamType());
-        ElementsCollection examHours = $$(byXpath(desiredExamTypeLocator));
-        ElementsCollection availableHours = examHours.filter(Condition.cssValue("color", availableColor));
+        String desiredExamTypeLocator = String.format(availableExamTypeLocator, exam.getExamType());
+        ElementsCollection availableHours = $$(byXpath(desiredExamTypeLocator));
 
         String termDate = getCurrentTerm();
         if (availableHours.size() == 0) {

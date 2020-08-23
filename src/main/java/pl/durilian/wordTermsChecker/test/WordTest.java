@@ -8,6 +8,8 @@ import pl.durilian.wordTermsChecker.entities.InfoCarAccount;
 import pl.durilian.wordTermsChecker.utils.Configuration;
 import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
 
+import static java.util.Optional.ofNullable;
+
 
 public class WordTest {
 
@@ -24,8 +26,8 @@ public class WordTest {
     public static void checkTermsForMe(@Optional() Exam desiredExam, @Optional() InfoCarAccount account) {
         Configuration.initTermCheckerProperties();
 
-        desiredExam = java.util.Optional.ofNullable(desiredExam).orElse(Exam.getExamFromProperties());
-        account = java.util.Optional.ofNullable(account).orElse(InfoCarAccount.getInfoCarAccountFromProperties());
+        desiredExam = ofNullable(desiredExam).orElse(Exam.getExamFromProperties());
+        account = ofNullable(account).orElse(InfoCarAccount.getInfoCarAccountFromProperties());
         boolean checkNextMonth = Boolean.parseBoolean(
                 ConfigurationManager.getTermCheckerPropertyValue("checkNextMonth"));
 
