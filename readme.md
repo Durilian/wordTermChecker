@@ -60,12 +60,12 @@ I have decided to write it as well as my programmatic skills allow me to. So if 
 3. Selenide is so great that I do not have to overcome many selenium problems because most of them have a built-in solution in Selenide. For example, I do not have to use the stream() by myself because they have a smart implementation in the filter() method
 4. I decided to make this project as simple as possible to use for Polish non-technical users (main "target" for this app) so logs and UI are available only in Polish.
 I am open to suggestions and criticism as I want to use this project to develop my programming skills.
-<br>
+
 ## How to run - non-technical
 1. Download and install:  [JAVA](https://www.java.com/en/download/) (version 11 or higher)
 2. Download and install:  [WirePusher app](https://play.google.com/store/apps/details?id=com.mrivan.wirepusher) for pushes (Android only)
 3. Download and run this program from JAR file
-<br>
+
 ## How to run - technical
 1. Download and build project (Java 11+)
 2. Set values in [configuration](src/main/resources/configuration/configuration.properties)
@@ -74,6 +74,6 @@ I am open to suggestions and criticism as I want to use this project to develop 
   * Run [test](src/main/java/pl/durilian/wordTermsChecker/test/WordTest.java) (testNG)
 
 Both runners should work identically. Both of them use in the end test from second point
-<br>
+
 ## About me / contact
 I am tester with a few years of experience. I am currently focusing on this project and developing my programmatic skills. If you would like to know more about me or you are looking for contact visit my [Linkedin profile](https://www.linkedin.com/in/marek-stawarczyk-30990912a/)
