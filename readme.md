@@ -1,6 +1,6 @@
-#### **FOR ENGLISH SCROLL BELLOW**
+### **FOR ENGLISH SCROLL BELLOW**
 
-## **WYSZUKIWARKA TERMINÓW NA PRAWO JAZDY**
+# **WYSZUKIWARKA TERMINÓW NA PRAWO JAZDY**
 # Spis treści / Table of Contents
  1. [Wprowadzenie](#wprowadzenie)
  2. [Po co to jest](#po-co-to-jest)
@@ -12,13 +12,12 @@
  8. [How to run - technical](#how-to-run---technical)
  9. [About me / contact](#about-me--contact)
  
-### Wprowadzenie
+#### Wprowadzenie
 Cześć wszystkim,<br>
 Jestem Marek i jestem testerem, poza pracą mam Dziewczynę Patrycję i to w sumie dzięki niej teraz czytacie ten wstęp.<br>
 Tak się składa, że Patrycja jest w trakcie zdawania na prawo jazdy, a że z terminami bywa różnie postanowiłem wspomóc ją z moimi zawodowymi umiejętnościami.
 <br>
-
-### Po co to jest
+##### Po co to jest
 Do otrzymywania powiadomień o wolnych terminach na prawo jazdy zaraz po tym jak się zwolnią. <br>
 Powyższy projekt uruchamia przeglądarkę i co zadany czas sprawdza 
 w wybranych przez nas miastach czy dostępny jest termin egzaminu spełniający nasze kryteria.
@@ -30,14 +29,13 @@ to użycia danych wrażliwych jak np. pesel czy numer profilu kandydata. <br>
 **UWAGA:** Program do działania wymaga danych do konta info-car (mail/hasło) i nigdzie więcej te dane nie są używane/zapisywane. 
 Jeśli boisz się o swoje dane to zalecam założyć dedykowane konto info-car z innym hasłem tylko na potrzeby tej aplikacji.
 <br>
-
-### Uruchamianie - osoby nietechniczne
+## Uruchamianie - osoby nietechniczne
 1. Pobrać i zainstalować: [JAVA](https://www.java.com/pl/download/) (wersja 11 lub nowsza)
 2. Pobrać i zainstalować: [aplikację WirePusher](https://play.google.com/store/apps/details?id=com.mrivan.wirepusher) do powiadomień (Android only)
 3. Pobrać i uruchomić ten program w postaci pliku JAR
 <br>
 
-### Uruchamianie - osoby techniczne
+## Uruchamianie - osoby techniczne
 1. Pobrać repozytorium i zbudować projekt (wymaga Java 11+)
 2. Ustawić wartości dla [konfiguracji](src/main/resources/configuration/configuration.properties)
 3. Uruchomić jeden z dwóch trybów:
@@ -46,12 +44,11 @@ Jeśli boisz się o swoje dane to zalecam założyć dedykowane konto info-car z
 
 Oba tryby powinny działać identycznie i działają używając testu z drugiego podpunktu.
 <br>
-
-### Kontakt
+## Kontakt
 Jeśli masz uwagi, pomysły, bugi, bądź po prostu chciałbyś wyrazić swoją opinie to zapraszam do kontaktu pod mafikrpg@gmail.com
 <br>
 
-### Hello everyone!
+## Hello everyone!
 I made this project for my girlfriend which is currently trying to get a driving license. But the terms for the exam are very long. So I made this checker for her and then decided to make it public.
 
 Writing this project gave me a lot of fun and I have still a lot of ideas on how to improve it and expand its functionalities. So probably I will be still committing here.
@@ -64,14 +61,12 @@ I have decided to write it as well as my programmatic skills allow me to. So if 
 4. I decided to make this project as simple as possible to use for Polish non-technical users (main "target" for this app) so logs and UI are available only in Polish.
 I am open to suggestions and criticism as I want to use this project to develop my programming skills.
 <br>
-
-### How to run - non-technical
+## How to run - non-technical
 1. Download and install:  [JAVA](https://www.java.com/en/download/) (version 11 or higher)
 2. Download and install:  [WirePusher app](https://play.google.com/store/apps/details?id=com.mrivan.wirepusher) for pushes (Android only)
 3. Download and run this program from JAR file
 <br>
-
-### How to run - technical
+## How to run - technical
 1. Download and build project (Java 11+)
 2. Set values in [configuration](src/main/resources/configuration/configuration.properties)
 3. Run one of the two runners
@@ -80,6 +75,5 @@ I am open to suggestions and criticism as I want to use this project to develop 
 
 Both runners should work identically. Both of them use in the end test from second point
 <br>
-
-### About me / contact
+## About me / contact
 I am tester with a few years of experience. I am currently focusing on this project and developing my programmatic skills. If you would like to know more about me or you are looking for contact visit my [Linkedin profile](https://www.linkedin.com/in/marek-stawarczyk-30990912a/)
