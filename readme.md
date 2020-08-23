@@ -12,12 +12,12 @@
  8. [How to run - technical](#how-to-run---technical)
  9. [About me / contact](#about-me--contact)
  
-#### Wprowadzenie
+## Wprowadzenie
 Cześć wszystkim,<br>
 Jestem Marek i jestem testerem, poza pracą mam Dziewczynę Patrycję i to w sumie dzięki niej teraz czytacie ten wstęp.<br>
 Tak się składa, że Patrycja jest w trakcie zdawania na prawo jazdy, a że z terminami bywa różnie postanowiłem wspomóc ją z moimi zawodowymi umiejętnościami.
 <br>
-##### Po co to jest
+## Po co to jest
 Do otrzymywania powiadomień o wolnych terminach na prawo jazdy zaraz po tym jak się zwolnią. <br>
 Powyższy projekt uruchamia przeglądarkę i co zadany czas sprawdza 
 w wybranych przez nas miastach czy dostępny jest termin egzaminu spełniający nasze kryteria.
