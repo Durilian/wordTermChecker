@@ -24,7 +24,6 @@ public class RestService {
      * @param title   of the push notification
      * @param message of the push notification
      */
-
     public ValidatableResponse notify(String title, String message) {
         String baseURL = "https://wirepusher.com/send";
         log.info(String.format("Wysyłam wiadomość: %s o treści %s", title, message));
