@@ -1,4 +1,4 @@
-### **FOR ENGLISH SCROLL BELLOW**
+### **FOR ENGLISH SCROLL BELOW**
 
 # **WYSZUKIWARKA TERMINÓW NA PRAWO JAZDY**
 # Spis treści / Table of Contents
