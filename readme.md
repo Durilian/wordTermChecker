@@ -1,4 +1,4 @@
-### **FOR ENGLISH SCROLL BELLOW**
+### **FOR ENGLISH SCROLL BELOW**
 
 INFO: If you see this message it means that project is still before official release. 
 I am going through review process and family & friends test. Due to that you won't find, for e.g. 
