@@ -1,5 +1,9 @@
 ### **FOR ENGLISH SCROLL BELLOW**
 
+INFO: If you see this message it means that project is still before official release. 
+I am going through review process and family & friends test. Due to that you won't find, for e.g. 
+JAR version of app  
+
 # **WYSZUKIWARKA TERMINÓW NA PRAWO JAZDY**
 # Spis treści / Table of Contents
  1. [Wprowadzenie](#wprowadzenie)
