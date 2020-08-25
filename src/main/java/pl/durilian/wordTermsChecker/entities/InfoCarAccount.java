@@ -1,7 +1,6 @@
 package pl.durilian.wordTermsChecker.entities;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
 
@@ -10,7 +9,6 @@ import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class InfoCarAccount {
     private String email;
     private String password;

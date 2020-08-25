@@ -41,8 +41,9 @@ Jeśli boisz się o swoje dane to zalecam założyć dedykowane konto info-car z
 
 ## Uruchamianie - osoby techniczne
 1. Pobrać repozytorium i zbudować projekt (wymaga Java 11+)
-2. Ustawić wartości dla [konfiguracji](src/main/resources/configuration/configuration.properties)
-3. Uruchomić jeden z dwóch trybów:
+2. Zainstalować plugin Lombok i umożliwić procesowanie adnotacji
+3. Ustawić wartości dla [konfiguracji](src/main/resources/configuration/configuration.properties)
+4. Uruchomić jeden z dwóch trybów:
   * Uruchomić [UI](src/main/java/pl/durilian/wordTermsChecker/Runner.java)
   * Uruchomić [test](src/main/java/pl/durilian/wordTermsChecker/test/WordTest.java) (testNG)
 
@@ -72,8 +73,9 @@ I am open to suggestions and criticism as I want to use this project to develop 
 
 ## How to run - technical
 1. Download and build project (Java 11+)
-2. Set values in [configuration](src/main/resources/configuration/configuration.properties)
-3. Run one of the two runners
+2. Download and install Lombok plugin then enable annotation processing
+3. Set values in [configuration](src/main/resources/configuration/configuration.properties)
+4. Run one of the two runners
   * Run [UI](src/main/java/pl/durilian/wordTermsChecker/Runner.java)
   * Run [test](src/main/java/pl/durilian/wordTermsChecker/test/WordTest.java) (testNG)
 
