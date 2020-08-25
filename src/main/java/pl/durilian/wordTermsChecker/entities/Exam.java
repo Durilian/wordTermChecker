@@ -1,7 +1,6 @@
 package pl.durilian.wordTermsChecker.entities;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
 
@@ -10,7 +9,6 @@ import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class Exam {
     private String[] cities;
     private String category;
@@ -39,6 +37,6 @@ public class Exam {
     }
 
     public String getExamType() {
-        return examType.getExamTypeName();
+        return examType.getExamType();
     }
 }
