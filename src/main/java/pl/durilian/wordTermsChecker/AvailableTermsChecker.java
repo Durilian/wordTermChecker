@@ -19,7 +19,6 @@ public class AvailableTermsChecker {
     private final InfoCarAccount account;
     private final boolean checkNextMonth;
     private int poolingTime;
-    private String currentCity;
 
     /**
      * Constructor used for setting data needed for searches
@@ -64,30 +63,27 @@ public class AvailableTermsChecker {
      * </pre>
      */
     public void checkTerm() {
-        boolean isAvailableTerm = false;
+        boolean isAvailableTerm;
         ReservationPage reservationPage = new LoginPage()
                 .start()
                 .login(account.getEmail(), account.getPassword())
                 .goToReservations();
         while (true) {
             for (String city : desiredExam.getCities()) {
-                this.currentCity = city;
                 isAvailableTerm = reservationPage
-                        .goToAvailableTerms(currentCity, desiredExam)
-                        .checkCurrentMonth(currentCity, desiredExam);
+                        .goToAvailableTerms(city, desiredExam)
+                        .checkCurrentMonth(city, desiredExam);
                 if (isAvailableTerm) {
                     String termDate = reservationPage.getCurrentTerm();
                     client.notify(city + " wolny termin:", termDate);
-                    isAvailableTerm = false;
                 } else if (this.checkNextMonth) {
                     isAvailableTerm =
                             reservationPage
                                     .goToNextMonth()
-                                    .checkCurrentMonth(currentCity, desiredExam);
+                                    .checkCurrentMonth(city, desiredExam);
                     if (isAvailableTerm) {
                         String termDate = reservationPage.getCurrentTerm();
                         client.notify(city + ":", termDate);
-                        isAvailableTerm = false;
                     }
                 }
                 Selenide.refresh();
