@@ -1,6 +1,5 @@
 package pl.durilian.wordTermsChecker.services;
 
-import io.restassured.response.ValidatableResponse;
 import lombok.extern.log4j.Log4j2;
 import pl.durilian.wordTermsChecker.utils.Configuration;
 import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
@@ -10,9 +9,9 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 @Log4j2
-public class RestService {
+public class WirePusherNotifierService implements NotifierService {
 
-    public RestService() {
+    public WirePusherNotifierService() {
         Configuration.initWirePusherProperties();
     }
 
@@ -24,10 +23,10 @@ public class RestService {
      * @param title   of the push notification
      * @param message of the push notification
      */
-    public ValidatableResponse notify(String title, String message) {
+    public void notify(String title, String message) {
         String baseURL = "https://wirepusher.com/send";
         log.info(String.format("Wysyłam wiadomość: %s o treści %s", title, message));
-        return given()
+        given()
                 .when()
                 .queryParams(Map.of
                         (

@@ -2,24 +2,25 @@ package pl.durilian.wordTermsChecker;
 
 import com.codeborne.selenide.Selenide;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import pl.durilian.wordTermsChecker.entities.Exam;
 import pl.durilian.wordTermsChecker.entities.InfoCarAccount;
 import pl.durilian.wordTermsChecker.pages.LoginPage;
 import pl.durilian.wordTermsChecker.pages.ReservationPage;
-import pl.durilian.wordTermsChecker.services.RestService;
+import pl.durilian.wordTermsChecker.services.NotifierService;
 
 @Log4j2
 /**
  * Main class of the project responsible for checking free terms available for desired criterias
  */
 public class AvailableTermsChecker {
-    private final RestService client = new RestService();
     private final int MIN_POOLING_TIME = 30;
     private final Exam desiredExam;
     private final InfoCarAccount account;
     private final boolean checkNextMonth;
     private int poolingTime;
     private String currentCity;
+    private final NotifierService notifier;
 
     /**
      * Constructor used for setting data needed for searches
@@ -28,10 +29,12 @@ public class AvailableTermsChecker {
      * @param desiredExam    Exam represent set of data describing exam: array of cities, category and exam type
      * @param checkNextMonth boolean describing if AvailavbleTermsChecker should check also terms available in next months
      */
-    public AvailableTermsChecker(InfoCarAccount account, Exam desiredExam, boolean checkNextMonth) {
+    @Autowired
+    public AvailableTermsChecker(InfoCarAccount account, Exam desiredExam, boolean checkNextMonth, NotifierService notifier) {
         this.desiredExam = desiredExam;
         this.account = account;
         this.checkNextMonth = checkNextMonth;
+        this.notifier = notifier;
     }
 
     /**
@@ -77,7 +80,7 @@ public class AvailableTermsChecker {
                         .checkCurrentMonth(currentCity, desiredExam);
                 if (isAvailableTerm) {
                     String termDate = reservationPage.getCurrentTerm();
-                    client.notify(city + " wolny termin:", termDate);
+                    notifier.notify(city + " wolny termin:", termDate);
                     isAvailableTerm = false;
                 } else if (this.checkNextMonth) {
                     isAvailableTerm =
@@ -86,7 +89,7 @@ public class AvailableTermsChecker {
                                     .checkCurrentMonth(currentCity, desiredExam);
                     if (isAvailableTerm) {
                         String termDate = reservationPage.getCurrentTerm();
-                        client.notify(city + ":", termDate);
+                        notifier.notify(city + ":", termDate);
                         isAvailableTerm = false;
                     }
                 }

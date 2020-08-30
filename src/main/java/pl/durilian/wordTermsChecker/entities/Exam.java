@@ -2,7 +2,6 @@ package pl.durilian.wordTermsChecker.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
 
 /**
  * Class containing data set describing exam: @cities, @category, @examType
@@ -25,15 +24,6 @@ public class Exam {
         this.cities = cities;
         this.category = category;
         this.examType = examType;
-    }
-
-    public static Exam getExamFromProperties() {
-        String[] cities = ConfigurationManager.getTermCheckerPropertyValue("cities").split(",");
-        return new Exam(
-                cities,
-                ConfigurationManager.getTermCheckerPropertyValue("category"),
-                ExamType.get(ConfigurationManager.getTermCheckerPropertyValue("examType"))
-        );
     }
 
     public String getExamType() {

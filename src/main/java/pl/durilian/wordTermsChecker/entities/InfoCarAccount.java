@@ -2,7 +2,6 @@ package pl.durilian.wordTermsChecker.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
 
 /**
  * Class containg data set needed to loging into info-car website
@@ -16,12 +15,5 @@ public class InfoCarAccount {
     public InfoCarAccount(String email, String password) {
         this.email = email;
         this.password = password;
-    }
-
-    public static InfoCarAccount getInfoCarAccountFromProperties() {
-        return new InfoCarAccount(
-                ConfigurationManager.getTermCheckerPropertyValue("email"),
-                ConfigurationManager.getTermCheckerPropertyValue("password")
-        );
     }
 }
