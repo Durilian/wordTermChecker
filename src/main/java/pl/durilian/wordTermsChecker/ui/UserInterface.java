@@ -146,7 +146,7 @@ public class UserInterface extends JFrame {
         textfieldPoolingTime.setBounds(500, 170, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
 
         //Comboboxes
-        String[] examTypes = {ExamType.PRACTICE.getExamTypeName(), ExamType.THEORY.getExamTypeName()};
+        String[] examTypes = {ExamType.PRACTICE.getExamType(), ExamType.THEORY.getExamType()};
         JComboBox comboBoxExamType = new JComboBox(examTypes);
         comboBoxExamType.setBounds(100, 210, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
 

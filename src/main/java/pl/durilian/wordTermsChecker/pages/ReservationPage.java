@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.log4j.Log4j2;
 import pl.durilian.wordTermsChecker.entities.Exam;
+import pl.durilian.wordTermsChecker.entities.ExamType;
 
 import static com.codeborne.selenide.Condition.and;
 import static com.codeborne.selenide.Condition.not;
@@ -75,17 +76,17 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
      * Then it clicks each element and checks if it has a free terms in desired
      * exam category. After that it closes day view and go to next element
      *
-     * @param city passed to checkSingleDay
-     * @param exam passed to checkSingleDay
+     * @param city     passed to checkSingleDay
+     * @param examType passed to checkSingleDay
      * @return true if there is free term available
      */
-    public boolean checkCurrentMonth(String city, Exam exam) {
+    public boolean checkCurrentMonth(String city, ExamType examType) {
         log.trace("Sprawdzam aktualny miesiąc");
         boolean isAvailableTerm;
 
         for (SelenideElement term : availableDays) {
             term.click();
-            isAvailableTerm = checkSingleDay(city, exam);
+            isAvailableTerm = checkSingleDay(city, examType);
             if (isAvailableTerm)
                 return isAvailableTerm;
             blurredArea.pressEscape();
@@ -117,14 +118,14 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
      * log file: yyyy-MM-dd-wolneTerminy.log
      * </pre>
      *
-     * @param city only for logging/notification purpose
-     * @param exam for getting exam type needed for checks
+     * @param city     only for logging/notification purpose
+     * @param examType for getting exam type needed for checks
      * @return true if there is free hour with desired exam type
      */
-    private boolean checkSingleDay(String city, Exam exam) {
+    private boolean checkSingleDay(String city, ExamType examType) {
         log.trace("Sprawdzam dostępne godziny");
 
-        String desiredExamTypeLocator = String.format(availableExamTypeLocator, exam.getExamType());
+        String desiredExamTypeLocator = String.format(availableExamTypeLocator, examType.getExamType());
         ElementsCollection availableHours = $$(byXpath(desiredExamTypeLocator));
 
         String termDate = getCurrentTerm();

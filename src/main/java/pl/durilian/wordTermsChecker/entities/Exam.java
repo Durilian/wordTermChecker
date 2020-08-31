@@ -35,8 +35,4 @@ public class Exam {
                 ExamType.get(ConfigurationManager.getTermCheckerPropertyValue("examType"))
         );
     }
-
-    public String getExamType() {
-        return examType.getExamType();
-    }
 }

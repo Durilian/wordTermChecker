@@ -2,7 +2,7 @@ package pl.durilian.wordTermsChecker.test;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Test;
-import pl.durilian.wordTermsChecker.AvailableTermsChecker;
+import pl.durilian.wordTermsChecker.TermsChecker;
 import pl.durilian.wordTermsChecker.entities.Exam;
 import pl.durilian.wordTermsChecker.entities.InfoCarAccount;
 import pl.durilian.wordTermsChecker.utils.Configuration;
@@ -31,7 +31,7 @@ public class WordTest {
         boolean checkNextMonth = Boolean.parseBoolean(
                 ConfigurationManager.getTermCheckerPropertyValue("checkNextMonth"));
 
-        AvailableTermsChecker termChecker = new AvailableTermsChecker(account, desiredExam, checkNextMonth);
+        TermsChecker termChecker = new TermsChecker(account, desiredExam, checkNextMonth);
 
         termChecker.setPoolingTime(
                 Integer.parseInt(ConfigurationManager.getTermCheckerPropertyValue("poolingTime")));

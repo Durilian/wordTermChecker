@@ -12,7 +12,7 @@ import pl.durilian.wordTermsChecker.services.RestService;
 /**
  * Main class of the project responsible for checking free terms available for desired criterias
  */
-public class AvailableTermsChecker {
+public class TermsChecker {
     private final RestService client = new RestService();
     private final int MIN_POOLING_TIME = 30;
     private final Exam desiredExam;
@@ -27,7 +27,7 @@ public class AvailableTermsChecker {
      * @param desiredExam    Exam represent set of data describing exam: array of cities, category and exam type
      * @param checkNextMonth boolean describing if AvailavbleTermsChecker should check also terms available in next months
      */
-    public AvailableTermsChecker(InfoCarAccount account, Exam desiredExam, boolean checkNextMonth) {
+    public TermsChecker(InfoCarAccount account, Exam desiredExam, boolean checkNextMonth) {
         this.desiredExam = desiredExam;
         this.account = account;
         this.checkNextMonth = checkNextMonth;
@@ -70,21 +70,11 @@ public class AvailableTermsChecker {
                 .goToReservations();
         while (true) {
             for (String city : desiredExam.getCities()) {
-                isAvailableTerm = reservationPage
-                        .goToAvailableTerms(city, desiredExam)
-                        .checkCurrentMonth(city, desiredExam);
-                if (isAvailableTerm) {
-                    String termDate = reservationPage.getCurrentTerm();
-                    client.notify(city + " wolny termin:", termDate);
-                } else if (this.checkNextMonth) {
-                    isAvailableTerm =
-                            reservationPage
-                                    .goToNextMonth()
-                                    .checkCurrentMonth(city, desiredExam);
-                    if (isAvailableTerm) {
-                        String termDate = reservationPage.getCurrentTerm();
-                        client.notify(city + ":", termDate);
-                    }
+                reservationPage.goToAvailableTerms(city, desiredExam);
+                isAvailableTerm = isAvailableTermInCurrentMonth(city, reservationPage);
+                if (!isAvailableTerm && this.checkNextMonth) {
+                    reservationPage.goToNextMonth();
+                    isAvailableTermInCurrentMonth(city, reservationPage);
                 }
                 Selenide.refresh();
             }
@@ -92,4 +82,17 @@ public class AvailableTermsChecker {
             Selenide.sleep(poolingTime);
         }
     }
+
+    private boolean isAvailableTermInCurrentMonth(String city, ReservationPage reservationPage) {
+        boolean isAvailable;
+        isAvailable = reservationPage
+                .checkCurrentMonth(city, desiredExam.getExamType());
+        if (isAvailable) {
+            String termDate = reservationPage.getCurrentTerm();
+            client.notify(city + " wolny termin:", termDate);
+        }
+        return isAvailable;
+    }
+
+
 }
