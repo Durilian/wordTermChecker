@@ -85,7 +85,7 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
         boolean isAvailableTerm;
 
         for (SelenideElement term : availableDays) {
-            term.click();
+            term.scrollIntoView(true).click();
             isAvailableTerm = checkSingleDay(city, examType);
             if (isAvailableTerm)
                 return isAvailableTerm;

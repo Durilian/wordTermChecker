@@ -35,9 +35,9 @@ public class UserInterface extends JFrame {
     private final static int TEXT_FIELD_WIDTH = 250;
     private final static int TEXT_FIELD_HEIGHT = 30;
     private final static int LOGS_WIDTH = 850;
-    private final static int LOGS_HEIGHT = 500;
-    private final static int FRAME_WIDTH = 1400;
-    private final static int FRAME_HEIGHT = 950;
+    private final static int LOGS_HEIGHT = 450;
+    private final static int FRAME_WIDTH = 1250;
+    private final static int FRAME_HEIGHT = 850;
     //logs
     JTextArea textAreaLogs;
     JScrollPane scroll;
@@ -64,11 +64,11 @@ public class UserInterface extends JFrame {
         JFrame frame = new JFrame("Wyszukiwarka terminów");
         //start button
         JButton runButton = new JButton("Wyszukaj terminów");
-        runButton.setBounds(100, 300, BUTTON_WITDH, BUTTON_HEIGHT);
+        runButton.setBounds(100, 270, BUTTON_WITDH, BUTTON_HEIGHT);
 
         //Clearing logs
         JButton clearLogsButton = new JButton("Wyczyść logi");
-        clearLogsButton.setBounds(890, 860, BUTTON_WITDH, BUTTON_HEIGHT);
+        clearLogsButton.setBounds(890, 730, BUTTON_WITDH, BUTTON_HEIGHT);
 
         //LABELS
         JLabel labelCity1 = new JLabel();
@@ -170,7 +170,7 @@ public class UserInterface extends JFrame {
         textAreaLogs = new JTextArea();
         textAreaLogs.setEditable(false);
         scroll = new JScrollPane(textAreaLogs);
-        scroll.setBounds(10, 400, LOGS_WIDTH, LOGS_HEIGHT);
+        scroll.setBounds(10, 330, LOGS_WIDTH, LOGS_HEIGHT);
 
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
