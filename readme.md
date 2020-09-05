@@ -34,9 +34,13 @@ to użycia danych wrażliwych jak np. pesel czy numer profilu kandydata. <br>
 Jeśli boisz się o swoje dane to zalecam założyć dedykowane konto info-car z innym hasłem tylko na potrzeby tej aplikacji.
 <br>
 ## Uruchamianie - osoby nietechniczne
-1. Pobrać i zainstalować: [JAVA](https://www.java.com/pl/download/) (wersja 11 lub nowsza)
+Opcja niewspierana w aktualnej wersji, jeśli jednak chce ktoś spróbować 
+swoich sił trzeba podjąć następujące kroki: <br>
+1. Pobrać i rozpakować: [JAVA OpenJDK](https://jdk.java.net/14/) (wersja 11 lub nowsza)
 2. Pobrać i zainstalować: [aplikację WirePusher](https://play.google.com/store/apps/details?id=com.mrivan.wirepusher) do powiadomień (Android only)
-3. Pobrać i uruchomić ten program w postaci pliku JAR
+3. Pobrać plik JAR z sekcji "RELEASES"
+4. Uruchomić linię komend i podać następująca komendę
+`"ŚCIEŻKA/DO/OPENJDK/bin/javaw.exe" -jar "ŚCIEŻKA/DO/PLIKU/JAR"`
 <br>
 
 ## Uruchamianie - osoby techniczne
@@ -67,9 +71,12 @@ I have decided to write it as well as my programmatic skills allow me to. So if 
 I am open to suggestions and criticism as I want to use this project to develop my programming skills.
 
 ## How to run - non-technical
-1. Download and install:  [JAVA](https://www.java.com/en/download/) (version 11 or higher)
+Currently not supported. If you would like to try anyway, there are sample steps to do:<br>
+1. Download and unzip:  [JAVA OpenJDK](https://jdk.java.net/14/) (version 11 or higher)
 2. Download and install:  [WirePusher app](https://play.google.com/store/apps/details?id=com.mrivan.wirepusher) for pushes (Android only)
-3. Download and run this program from JAR file
+3. Download program as JAR file from "RELEASE" section
+4. Run commandline and use below command
+   `"PATH/TO/OPENJDK/bin/javaw.exe" -jar "PATH/TO/FILE/JAR"`
 
 ## How to run - technical
 1. Download and build project (Java 11+)
