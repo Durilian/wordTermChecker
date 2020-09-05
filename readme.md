@@ -34,8 +34,8 @@ Opcja niewspierana w aktualnej wersji, jeśli jednak chce ktoś spróbować
 swoich sił trzeba podjąć następujące kroki: <br>
 1. Pobrać i rozpakować: [JAVA OpenJDK](https://jdk.java.net/14/) (wersja 11 lub nowsza)
 2. Pobrać i zainstalować: [aplikację WirePusher](https://play.google.com/store/apps/details?id=com.mrivan.wirepusher) do powiadomień (Android only)
-3. Pobrać plik JAR z sekcji "RELEASES"
-4. Uruchomić linię komend i podać następująca komendę
+3. Pobrać plik [JAR](https://github.com/Durilian/wordTermChecker/releases/download/v1.0.0/wordTermsChecker-1.0.0.jar) z sekcji "RELEASES"
+4. Uruchomić wiesz polecenia i podać następująca komendę
 `"ŚCIEŻKA/DO/OPENJDK/bin/javaw.exe" -jar "ŚCIEŻKA/DO/PLIKU/JAR"`
 <br>
 
@@ -70,7 +70,7 @@ I am open to suggestions and criticism as I want to use this project to develop 
 Currently not supported. If you would like to try anyway, there are sample steps to do:<br>
 1. Download and unzip:  [JAVA OpenJDK](https://jdk.java.net/14/) (version 11 or higher)
 2. Download and install:  [WirePusher app](https://play.google.com/store/apps/details?id=com.mrivan.wirepusher) for pushes (Android only)
-3. Download program as JAR file from "RELEASE" section
+3. Download program as [JAR](https://github.com/Durilian/wordTermChecker/releases/download/v1.0.0/wordTermsChecker-1.0.0.jar) file from "RELEASE" section
 4. Run commandline and use below command
    `"PATH/TO/OPENJDK/bin/javaw.exe" -jar "PATH/TO/FILE/JAR"`
 
