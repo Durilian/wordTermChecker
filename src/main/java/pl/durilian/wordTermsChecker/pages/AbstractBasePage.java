@@ -2,8 +2,10 @@ package pl.durilian.wordTermsChecker.pages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import pl.durilian.wordTermsChecker.utils.Configuration;
 
@@ -13,13 +15,14 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 @Setter
 @Log4j2
+@FieldDefaults(level = AccessLevel.PRIVATE)
 /**
  * contains fields and elements shared between all pages
  */
 public abstract class AbstractBasePage<T> {
-    private final String baseURL = "https://info-car.pl";
+    final String baseURL = "https://info-car.pl";
 
-    private final SelenideElement cookiesAcceptanceButton = $(byId("checkButton"));
+    final SelenideElement cookiesAcceptanceButton = $(byId("checkButton"));
 
     protected String URI;
 

@@ -6,9 +6,9 @@ import pl.durilian.wordTermsChecker.TermsChecker;
 import pl.durilian.wordTermsChecker.entities.Exam;
 import pl.durilian.wordTermsChecker.entities.InfoCarAccount;
 import pl.durilian.wordTermsChecker.utils.Configuration;
-import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
 
 import static java.util.Optional.ofNullable;
+import static pl.durilian.wordTermsChecker.utils.ConfigurationManager.getTermCheckerPropertyValue;
 
 
 public class WordTest {
@@ -24,17 +24,16 @@ public class WordTest {
      */
     @Test(retryAnalyzer = Retry.class)
     public static void checkTermsForMe(@Optional() Exam desiredExam, @Optional() InfoCarAccount account) {
+
         Configuration.initTermCheckerProperties();
 
         desiredExam = ofNullable(desiredExam).orElse(Exam.getExamFromProperties());
         account = ofNullable(account).orElse(InfoCarAccount.getInfoCarAccountFromProperties());
-        boolean checkNextMonth = Boolean.parseBoolean(
-                ConfigurationManager.getTermCheckerPropertyValue("checkNextMonth"));
+        int poolingTime = Integer.parseInt(getTermCheckerPropertyValue("poolingTime"));
+        boolean checkNextMonth = Boolean.parseBoolean(getTermCheckerPropertyValue("checkNextMonth"));
 
         TermsChecker termChecker = new TermsChecker(account, desiredExam, checkNextMonth);
-
-        termChecker.setPoolingTime(
-                Integer.parseInt(ConfigurationManager.getTermCheckerPropertyValue("poolingTime")));
+        termChecker.setPoolingTime(poolingTime);
 
         termChecker.checkTerm();
     }
