@@ -1,16 +1,19 @@
 package pl.durilian.wordTermsChecker.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import static com.codeborne.selenide.Selenide.$;
 
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class NewPage extends AbstractBasePage<NewPage> {
     public final static String URI = "/new";
 
     //locators
-    final private SelenideElement searchField = $("input");
-    final private SelenideElement searchResult = $(".search-results-box");
-    final private SelenideElement signForExamSearchResult = searchResult.find("[href*='rezerwacja']");
+    SelenideElement searchField = $("input");
+    SelenideElement searchResult = $(".search-results-box");
+    SelenideElement signForExamSearchResult = searchResult.find("[href*='rezerwacja']");
 
     /**
      * <pre>

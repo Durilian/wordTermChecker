@@ -29,10 +29,13 @@ public class Exam {
 
     public static Exam getExamFromProperties() {
         String[] cities = ConfigurationManager.getTermCheckerPropertyValue("cities").split(",");
+        String category = ConfigurationManager.getTermCheckerPropertyValue("category");
+        ExamType examType = ExamType.get(ConfigurationManager.getTermCheckerPropertyValue("examType"));
+
         return new Exam(
                 cities,
-                ConfigurationManager.getTermCheckerPropertyValue("category"),
-                ExamType.get(ConfigurationManager.getTermCheckerPropertyValue("examType"))
+                category,
+                examType
         );
     }
 }

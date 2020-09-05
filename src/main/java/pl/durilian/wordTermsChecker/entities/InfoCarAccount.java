@@ -19,9 +19,12 @@ public class InfoCarAccount {
     }
 
     public static InfoCarAccount getInfoCarAccountFromProperties() {
+        String email = ConfigurationManager.getTermCheckerPropertyValue("email");
+        String password = ConfigurationManager.getTermCheckerPropertyValue("password");
+
         return new InfoCarAccount(
-                ConfigurationManager.getTermCheckerPropertyValue("email"),
-                ConfigurationManager.getTermCheckerPropertyValue("password")
+                email,
+                password
         );
     }
 }

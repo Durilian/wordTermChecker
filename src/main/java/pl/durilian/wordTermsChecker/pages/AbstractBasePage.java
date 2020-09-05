@@ -18,14 +18,15 @@ import static com.codeborne.selenide.Selenide.$;
  */
 public abstract class AbstractBasePage<T> {
     private final String baseURL = "https://info-car.pl";
-    //locators
+
     private final SelenideElement cookiesAcceptanceButton = $(byId("checkButton"));
+
     protected String URI;
 
     /**
      * Method accepting cookies if cookies acceptance button is displayed
      *
-     * @return Pagge object which called this method
+     * @return Page object which called this method
      */
     private T acceptCookies() {
         if (cookiesAcceptanceButton.isDisplayed()) {

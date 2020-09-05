@@ -1,6 +1,8 @@
 package pl.durilian.wordTermsChecker;
 
 import com.codeborne.selenide.Selenide;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import pl.durilian.wordTermsChecker.entities.Exam;
 import pl.durilian.wordTermsChecker.entities.InfoCarAccount;
@@ -12,12 +14,13 @@ import pl.durilian.wordTermsChecker.services.RestService;
 /**
  * Main class of the project responsible for checking free terms available for desired criterias
  */
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class TermsChecker {
-    private final RestService client = new RestService();
-    private final int MIN_POOLING_TIME = 30;
-    private final Exam desiredExam;
-    private final InfoCarAccount account;
-    private final boolean checkNextMonth;
+    final RestService client = new RestService();
+    final int MIN_POOLING_TIME = 30;
+    final Exam desiredExam;
+    final InfoCarAccount account;
+    final boolean checkNextMonth;
     private int poolingTime;
 
     /**

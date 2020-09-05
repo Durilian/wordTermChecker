@@ -1,20 +1,23 @@
 package pl.durilian.wordTermsChecker.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.$;
 
 @Log4j2
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class LoginPage extends AbstractBasePage<LoginPage> {
 
     public final static String URI = "/oauth2/login";
 
     //locators
-    final private SelenideElement usernameField = $(byId("username"));
-    final private SelenideElement passwordField = $(byId("password"));
-    final private SelenideElement loginButton = $(byId("register-button"));
+    SelenideElement usernameField = $(byId("username"));
+    SelenideElement passwordField = $(byId("password"));
+    SelenideElement loginButton = $(byId("register-button"));
 
     public LoginPage() {
         setURI(URI);

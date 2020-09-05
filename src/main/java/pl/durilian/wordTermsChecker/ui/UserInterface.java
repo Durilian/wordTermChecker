@@ -1,5 +1,7 @@
 package pl.durilian.wordTermsChecker.ui;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import org.testng.TestNG;
 import pl.durilian.wordTermsChecker.entities.ExamType;
@@ -24,26 +26,27 @@ import java.util.List;
  * It is only a support tool used in jar version of app for those who are not familliar with code
  */
 @Log4j2
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserInterface extends JFrame {
     private static final long serialVersionUID = 1L;
     //consts
-    private final static int LOGS_DELAY = 450; //milis
-    private final static int BUTTON_WITDH = 240;
-    private final static int BUTTON_HEIGHT = 40;
-    private final static int LABEL_WIDTH = 400;
-    private final static int LABEL_HEIGHT = 100;
-    private final static int TEXT_FIELD_WIDTH = 250;
-    private final static int TEXT_FIELD_HEIGHT = 30;
-    private final static int LOGS_WIDTH = 850;
-    private final static int LOGS_HEIGHT = 450;
-    private final static int FRAME_WIDTH = 1250;
-    private final static int FRAME_HEIGHT = 850;
+    final static int LOGS_DELAY = 450; //milis
+    final static int BUTTON_WITDH = 240;
+    final static int BUTTON_HEIGHT = 40;
+    final static int LABEL_WIDTH = 400;
+    final static int LABEL_HEIGHT = 100;
+    final static int TEXT_FIELD_WIDTH = 250;
+    final static int TEXT_FIELD_HEIGHT = 30;
+    final static int LOGS_WIDTH = 850;
+    final static int LOGS_HEIGHT = 450;
+    final static int FRAME_WIDTH = 1250;
+    final static int FRAME_HEIGHT = 850;
     //logs
-    JTextArea textAreaLogs;
-    JScrollPane scroll;
-    private String logs;
-    private int prevLogListSize = 0;
-    private volatile Thread searchThread;
+    final JTextArea textAreaLogs;
+    final JScrollPane scroll;
+    String logs;
+    int prevLogListSize = 0;
+    volatile Thread searchThread;
 
     /**
      * <pre>

@@ -3,6 +3,8 @@ package pl.durilian.wordTermsChecker.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import pl.durilian.wordTermsChecker.entities.Exam;
 import pl.durilian.wordTermsChecker.entities.ExamType;
@@ -15,27 +17,28 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 @Log4j2
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ReservationPage extends AbstractBasePage<ReservationPage> {
     public final static String URI = "/infocar/konto/word/rezerwacja.html";
     //locators
-    final private SelenideElement reserveTermButtonBeforeLogin = $(byId("rt"));
-    final private SelenideElement reserveTermButtonAfterLogin = $(".redBtn");
-    final private SelenideElement monthTitleBar = $(byId("titleBarText"));
-    final private SelenideElement blurredArea = $(".https.blurred");
-    final private SelenideElement nextMonth = $(".icon.right");
-    final private SelenideElement wordSelector = $(byId("wordSelector"));
-    final private SelenideElement currentMonthTitle = $(byId("scheduleCurrentMonth"));
+    SelenideElement reserveTermButtonBeforeLogin = $(byId("rt"));
+    SelenideElement reserveTermButtonAfterLogin = $(".redBtn");
+    SelenideElement monthTitleBar = $(byId("titleBarText"));
+    SelenideElement blurredArea = $(".https.blurred");
+    SelenideElement nextMonth = $(".icon.right");
+    SelenideElement wordSelector = $(byId("wordSelector"));
+    SelenideElement currentMonthTitle = $(byId("scheduleCurrentMonth"));
 
-    final private ElementsCollection wordSelects = wordSelector.findAll("select");
-    final private ElementsCollection availableDays = $$(".available");
-    final private ElementsCollection selectedDayTitile = $$(byId("selectedDayTitle"));
-    final private ElementsCollection examCategories = $$(".examCategory");
-    final private ElementsCollection wordSelectLinks = $$(".wordSelectButton");
+    ElementsCollection wordSelects = wordSelector.findAll("select");
+    ElementsCollection availableDays = $$(".available");
+    ElementsCollection selectedDayTitile = $$(byId("selectedDayTitle"));
+    ElementsCollection examCategories = $$(".examCategory");
+    ElementsCollection wordSelectLinks = $$(".wordSelectButton");
 
-    final private String availableExamTypeLocator = "//td[not(@class='notAvailable')]//div[contains(text(), '%s')]";
+    String availableExamTypeLocator = "//td[not(@class='notAvailable')]//div[contains(text(), '%s')]";
 
-    final private int VOIVODESHIP_SELECT_INDEX = 0;
-    final private int CITY_SELECT_INDEX = 1;
+    int VOIVODESHIP_SELECT_INDEX = 0;
+    int CITY_SELECT_INDEX = 1;
 
     public ReservationPage() {
         setURI(URI);
@@ -49,7 +52,7 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
     }
 
     /**
-     * <pre>>
+     * <pre>
      * Use only after successfully loging into info-car website
      * This method picks desired city and exam category to
      * reach current month view with available terms
@@ -107,6 +110,18 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
         nextMonth.click();
         currentMonthTitle.shouldBe(differentThanPrevious);
         return this;
+    }
+
+    /**
+     * Method reading description of currently opened date from website
+     *
+     * @return e.g. "Terminy egzaminów dostępne 16. września 2020"
+     */
+    public String getCurrentTerm() {
+        return selectedDayTitile
+                .filter(Condition.visible)
+                .first()
+                .getText();
     }
 
     /**
@@ -169,17 +184,4 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
 
         return this;
     }
-
-    /**
-     * Method reading description of currently opened date from website
-     *
-     * @return e.g. "Terminy egzaminów dostępne 16. września 2020"
-     */
-    public String getCurrentTerm() {
-        return selectedDayTitile
-                .filter(Condition.visible)
-                .first()
-                .getText();
-    }
-
 }
