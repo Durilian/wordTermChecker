@@ -2,11 +2,11 @@ package pl.durilian.wordTermsChecker.test;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
-@Log4j2
+@Slf4j
 /**<pre>
  * Class responsible for evaluating if search and browser should be restarted
  * In cases like: webElement not visible or no internet connection etc. It will restart browser and search
