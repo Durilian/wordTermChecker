@@ -2,7 +2,7 @@ package pl.durilian.wordTermsChecker.ui;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.TestNG;
 import pl.durilian.wordTermsChecker.entities.ExamType;
 import pl.durilian.wordTermsChecker.test.WordTest;
@@ -25,7 +25,7 @@ import java.util.List;
  * Single class responsible for whole UI of the application. </br>
  * It is only a support tool used in jar version of app for those who are not familliar with code
  */
-@Log4j2
+@Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserInterface extends JFrame {
     private static final long serialVersionUID = 1L;

@@ -3,14 +3,14 @@ package pl.durilian.wordTermsChecker;
 import com.codeborne.selenide.Selenide;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import pl.durilian.wordTermsChecker.entities.Exam;
 import pl.durilian.wordTermsChecker.entities.InfoCarAccount;
 import pl.durilian.wordTermsChecker.pages.LoginPage;
 import pl.durilian.wordTermsChecker.pages.ReservationPage;
 import pl.durilian.wordTermsChecker.services.RestService;
 
-@Log4j2
+@Slf4j
 /**
  * Main class of the project responsible for checking free terms available for desired criterias
  */
@@ -86,6 +86,13 @@ public class TermsChecker {
         }
     }
 
+    /**
+     * Checks if current month has any available term and sends notification if finds one.
+     *
+     * @param city            current city
+     * @param reservationPage on which performs the ckecks
+     * @return true if term was found
+     */
     private boolean isAvailableTermInCurrentMonth(String city, ReservationPage reservationPage) {
         boolean isAvailable;
         isAvailable = reservationPage

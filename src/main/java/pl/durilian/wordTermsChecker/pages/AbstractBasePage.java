@@ -6,7 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import pl.durilian.wordTermsChecker.utils.Configuration;
 
 import static com.codeborne.selenide.Selectors.byId;
@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 @Setter
-@Log4j2
+@Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
 /**
  * contains fields and elements shared between all pages

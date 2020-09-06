@@ -1,6 +1,6 @@
 package pl.durilian.wordTermsChecker.utils;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-@Log4j2
+@Slf4j
 public class ConfigurationManager {
     private static final String SELENIDE_PREFIX = "selenide.";
     private static final String WIREPUSHER_PREFIX = "wirepusher.";
@@ -156,7 +156,7 @@ public class ConfigurationManager {
         try {
             return PropertiesLoaderUtils.loadAllProperties(filename);
         } catch (IOException exception) {
-            log.fatal("Could not load configuration from file: {}", filename);
+            log.error("Could not load configuration from file: {}", filename);
             throw new UncheckedIOException(exception);
         }
     }
