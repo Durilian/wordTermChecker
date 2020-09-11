@@ -159,7 +159,7 @@ public class ConfigurationManager {
         try {
             return PropertiesLoaderUtils.loadAllProperties(filename);
         } catch (IOException exception) {
-            log.fatal("Could not load configuration from file: {}", filename);
+            log.error("Could not load configuration from file: {}", filename);
             throw new UncheckedIOException(exception);
         }
     }
