@@ -3,12 +3,12 @@ package pl.durilian.wordTermsChecker.pages;
 import com.codeborne.selenide.SelenideElement;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.$;
 
-@Log4j2
+@Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class LoginPage extends AbstractBasePage<LoginPage> {
 

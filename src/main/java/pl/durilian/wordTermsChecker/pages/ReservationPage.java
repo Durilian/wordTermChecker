@@ -5,7 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import pl.durilian.wordTermsChecker.entities.Exam;
 import pl.durilian.wordTermsChecker.entities.ExamType;
 
@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-@Log4j2
+@Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ReservationPage extends AbstractBasePage<ReservationPage> {
     public final static String URI = "/infocar/konto/word/rezerwacja.html";
@@ -148,7 +148,7 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
             log.info(city + ": " + termDate + ": Nie ma wolnych terminów");
             return false;
         } else {
-            log.fatal(city + ": " + termDate + "!!!!!!!!! JEST TERMIN !!!!!!!!!!");
+            log.error(city + ": " + termDate + "!!!!!!!!! JEST TERMIN !!!!!!!!!!");
             return true;
         }
     }
