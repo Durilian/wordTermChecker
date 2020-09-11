@@ -81,6 +81,8 @@ public class SearchThread implements Runnable {
             testSuite.setTestClasses(new Class[]{WordTest.class});
             testSuite.addListener(new TestSuiteListener());
             testSuite.run();
+
+            stop();
         }
 
     }
