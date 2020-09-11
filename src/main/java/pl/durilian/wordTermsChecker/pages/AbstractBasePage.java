@@ -16,6 +16,7 @@ import static com.codeborne.selenide.Selenide.$;
 @Setter
 @Log4j2
 @FieldDefaults(level = AccessLevel.PRIVATE)
+
 /**
  * contains fields and elements shared between all pages
  */

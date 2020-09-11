@@ -212,12 +212,7 @@ public class UserInterface extends JFrame {
         new Timer(LOGS_DELAY, logAction).start();
 
         /**
-         * method updating logs every @{LOGS_DELAY} miliseconds
-         */
-
-        /**
          * Add start action to run button.
-         * You can launch multiple searches with different configuration in parallel
          */
         runButton.addActionListener(ae -> {
             List<String> cities = new ArrayList<String>();
@@ -267,20 +262,6 @@ public class UserInterface extends JFrame {
             }
         }
     }
-
-    /**
-     * <pre>
-     * Key point for the application responsible for launching checker of free terms
-     * </pre>
-     *
-     * @param cities      array of cities passed from UI as Miasto1, Miasto2 etc.
-     * @param category    category passed from UI e.g. "B"
-     * @param examType    teoria or praktyka String passed from UI
-     * @param email       email used as login on info-car passed from UI
-     * @param password    password for emmail on info-car passed from UI
-     * @param poolingTime interval between running search again
-     */
-
 
     /**
      * Method overwrriting file with todays logs with empty String

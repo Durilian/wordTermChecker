@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class NewPage extends AbstractBasePage<NewPage> {
-    public final static String URI = "/new";
+    public static String URI = "/new";
 
     //locators
     SelenideElement searchField = $("input");

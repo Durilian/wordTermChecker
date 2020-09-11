@@ -54,11 +54,11 @@ Jeśli masz uwagi, pomysły, bugi, bądź po prostu chciałbyś wyrazić swoją 
 <br>
 
 ## Hello everyone!
-I made this project for my girlfriend which is currently trying to get a driving license. But the terms for the exam are very long. So I made this checker for her and then decided to make it public.
+I made this project for my girlfriend which is currently trying to get a driving license. The terms for the exam are very long. So I made this checker for her and then decided to make it public.
 
-Writing this project gave me a lot of fun and I have still a lot of ideas on how to improve it and expand its functionalities. So probably I will be still committing here.
+Writing this project gave me a lot of fun, and I have still a lot of ideas on how to improve it and expand its functionalities. So probably I will be still committing here.
 
-I have decided to write it as well as my programmatic skills allow me to. So if you are here because you are thinking of hiring me this code is something you can expect from me. But before you make your decision some explanation:
+I have decided to write it as well as my programmatic skills allow me to. So if you are here because you are thinking of hiring me this code is something you can expect from me. Before you make your decision some explanation:
 
 1. As there is only one rest post API request I just put everything straight in one method. Because making some larger architecture for it would be an overkill for me.
 2. UI class - I just made it to allow non-technical users to use my project. It was my first adventure with UI and I am aware that it is terribly written and probably has tons of anti-patterns in it.

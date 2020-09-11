@@ -12,6 +12,10 @@ import pl.durilian.wordTermsChecker.test.WordTest;
 @Setter
 @Getter
 @Slf4j
+/**
+ * It is not a thread itself but it contains a thread that is responsible for running searches.
+ * Currently application create only 1 search thread and this thread need to be stopped to run new search.
+ */
 public class SearchThread implements Runnable {
     final String name = "searchThread";
     final Thread thread;
@@ -26,6 +30,18 @@ public class SearchThread implements Runnable {
     boolean checkNextMonth;
     ConfigurationManager configurationManager = ConfigurationManager.getInstance();
 
+    /**
+     * <pre>
+     * Loads data to thread responsible for launching searches
+     * </pre>
+     *
+     * @param cities      array of cities passed from UI as Miasto1, Miasto2 etc.
+     * @param category    category passed from UI e.g. "B"
+     * @param examType    teoria or praktyka String passed from UI
+     * @param email       email used as login on info-car passed from UI
+     * @param password    password for email on info-car passed from UI
+     * @param poolingTime interval between running search again
+     */
     public SearchThread(String[] cities, String category, String examType, String email, String
             password, String wirePusherId, int poolingTime, boolean checkNextMonth) {
         thread = new Thread(this, name);
@@ -43,6 +59,9 @@ public class SearchThread implements Runnable {
 
     }
 
+    /**
+     * Run the test that looks for a free term. Method uses data stored in thread to find desired exam
+     */
     public void run() {
         while (!exit) {
             String citiesSingleString = String.join(",", cities);
@@ -62,12 +81,13 @@ public class SearchThread implements Runnable {
             testSuite.setTestClasses(new Class[]{WordTest.class});
             testSuite.addListener(new TestSuiteListener());
             testSuite.run();
-            stop();
-            log.debug("thread kurna interrupted!");
         }
 
     }
 
+    /**
+     * Sets flag responsible for stopping search
+     */
     public void stop() {
         exit = true;
     }
