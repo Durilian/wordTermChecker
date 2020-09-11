@@ -3,12 +3,10 @@ package pl.durilian.wordTermsChecker.ui;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
-import org.testng.TestNG;
 import pl.durilian.wordTermsChecker.entities.ExamType;
-import pl.durilian.wordTermsChecker.test.WordTest;
 import pl.durilian.wordTermsChecker.utils.Configuration;
 import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
-import pl.durilian.wordTermsChecker.utils.TestSuiteListener;
+import pl.durilian.wordTermsChecker.utils.SearchThread;
 
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
@@ -19,6 +17,7 @@ import java.nio.file.Path;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +27,6 @@ import java.util.List;
 @Log4j2
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserInterface extends JFrame {
-    private static final long serialVersionUID = 1L;
     //consts
     final static int LOGS_DELAY = 450; //milis
     final static int BUTTON_WITDH = 240;
@@ -41,12 +39,14 @@ public class UserInterface extends JFrame {
     final static int LOGS_HEIGHT = 450;
     final static int FRAME_WIDTH = 1250;
     final static int FRAME_HEIGHT = 850;
+    private static final long serialVersionUID = 1L;
     //logs
     final JTextArea textAreaLogs;
     final JScrollPane scroll;
     String logs;
     int prevLogListSize = 0;
-    volatile Thread searchThread;
+    final ConfigurationManager configurationManager = ConfigurationManager.getInstance();
+    volatile SearchThread searchThread;
 
     /**
      * <pre>
@@ -129,23 +129,23 @@ public class UserInterface extends JFrame {
         textfieldCity3.setBounds(100, 130, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
 
         JTextField textfieldCategory = new JTextField();
-        textfieldCategory.setText(ConfigurationManager.getTermCheckerPropertyValue("category"));
+        textfieldCategory.setText(configurationManager.getTermCheckerPropertyValue("category"));
         textfieldCategory.setBounds(100, 170, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
 
         JTextField textfieldEmail = new JTextField();
-        textfieldEmail.setText(ConfigurationManager.getTermCheckerPropertyValue("email"));
+        textfieldEmail.setText(configurationManager.getTermCheckerPropertyValue("email"));
         textfieldEmail.setBounds(500, 50, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
 
         JPasswordField textfieldPassword = new JPasswordField();
-        textfieldPassword.setText(ConfigurationManager.getTermCheckerPropertyValue("password"));
+        textfieldPassword.setText(configurationManager.getTermCheckerPropertyValue("password"));
         textfieldPassword.setBounds(500, 90, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
 
         JTextField textfieldWirePusherID = new JTextField();
-        textfieldWirePusherID.setText(ConfigurationManager.getWirePusherPropertyValue("deviceId"));
+        textfieldWirePusherID.setText(configurationManager.getWirePusherPropertyValue("deviceId"));
         textfieldWirePusherID.setBounds(500, 130, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
 
         JFormattedTextField textfieldPoolingTime = new JFormattedTextField(getIntegerFormatter());
-        textfieldPoolingTime.setText(ConfigurationManager.getTermCheckerPropertyValue("poolingTime"));
+        textfieldPoolingTime.setText(configurationManager.getTermCheckerPropertyValue("poolingTime"));
         textfieldPoolingTime.setBounds(500, 170, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
 
         //Comboboxes
@@ -207,6 +207,10 @@ public class UserInterface extends JFrame {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        clearLogs();
+        ActionListener logAction = timerActionLogs();
+        new Timer(LOGS_DELAY, logAction).start();
+
         /**
          * method updating logs every @{LOGS_DELAY} miliseconds
          */
@@ -216,35 +220,27 @@ public class UserInterface extends JFrame {
          * You can launch multiple searches with different configuration in parallel
          */
         runButton.addActionListener(ae -> {
-            searchThread = new Thread(() -> {
-                Thread thisThread = Thread.currentThread();
-                while (searchThread == thisThread) {
-                    List<String> cities = new ArrayList<String>();
-                    if (!textfieldCity1.getText().isEmpty()) {
-                        cities.add(textfieldCity1.getText());
-                    }
-                    if (!textfieldCity2.getText().isEmpty()) {
-                        cities.add(textfieldCity2.getText());
-                    }
-                    if (!textfieldCity3.getText().isEmpty()) {
-                        cities.add(textfieldCity3.getText());
-                    }
-
-
-                    checkFreeTerms(cities.stream().toArray(String[]::new),
-                            textfieldCategory.getText(),
-                            (String) comboBoxExamType.getSelectedItem(),
-                            textfieldEmail.getText(),
-                            textfieldPassword.getText(),
-                            textfieldWirePusherID.getText(),
-                            Integer.parseInt(textfieldPoolingTime.getText()),
-                            checkNextMonth.isSelected()
-                    );
-                }
-            });
-
-            searchThread.start();
+            List<String> cities = new ArrayList<String>();
+            if (!textfieldCity1.getText().isEmpty()) {
+                cities.add(textfieldCity1.getText());
+            }
+            if (!textfieldCity2.getText().isEmpty()) {
+                cities.add(textfieldCity2.getText());
+            }
+            if (!textfieldCity3.getText().isEmpty()) {
+                cities.add(textfieldCity3.getText());
+            }
+            searchThread = new SearchThread(cities.toArray(String[]::new),
+                    textfieldCategory.getText(),
+                    (String) comboBoxExamType.getSelectedItem(),
+                    textfieldEmail.getText(),
+                    textfieldPassword.getText(),
+                    textfieldWirePusherID.getText(),
+                    Integer.parseInt(textfieldPoolingTime.getText()),
+                    checkNextMonth.isSelected());
+            SwingUtilities.invokeLater(searchThread);
         });
+
 
         /**
          * Add actions for clearing the log file
@@ -284,34 +280,7 @@ public class UserInterface extends JFrame {
      * @param password    password for emmail on info-car passed from UI
      * @param poolingTime interval between running search again
      */
-    private void checkFreeTerms(String[] cities, String category, String examType, String email, String
-            password, String wirePusherId, int poolingTime, boolean checkNextMonth) {
-        String citiesSingleString = String.join(",", cities);
 
-        //logs preparation
-        clearLogs();
-        ActionListener logAction = timerActionLogs();
-        new Timer(LOGS_DELAY, logAction).start();
-
-
-        String poolingTimeString = String.valueOf(poolingTime);
-        ConfigurationManager.setTermCheckerPropertyValue("email", email);
-        ConfigurationManager.setTermCheckerPropertyValue("category", category);
-        ConfigurationManager.setTermCheckerPropertyValue("password", password);
-        ConfigurationManager.setTermCheckerPropertyValue("examType", examType);
-        ConfigurationManager.setTermCheckerPropertyValue("category", category);
-        ConfigurationManager.setTermCheckerPropertyValue("cities", citiesSingleString);
-        ConfigurationManager.setWirePusherPropertyValue("deviceId", wirePusherId);
-        ConfigurationManager.setTermCheckerPropertyValue("poolingTime", poolingTimeString);
-        ConfigurationManager.setTermCheckerPropertyValue("checkNextMonth", String.valueOf(checkNextMonth));
-
-        TestNG testSuite = new TestNG();
-        testSuite.setTestClasses(new Class[]{WordTest.class});
-        testSuite.addListener(new TestSuiteListener());
-        testSuite.run();
-        searchThread.stop();
-
-    }
 
     /**
      * Method overwrriting file with todays logs with empty String
@@ -332,12 +301,9 @@ public class UserInterface extends JFrame {
      * @return
      */
     private String[] loadCitiesForUI() {
-        String[] citiesFromConfig = ConfigurationManager.getTermCheckerPropertyValue("cities").split(",");
-        String[] citiesForUI = new String[3];
-        for (int i = 0; i < citiesFromConfig.length; i++) {
-            citiesForUI[i] = citiesFromConfig[i];
-        }
-        return citiesForUI;
+        String[] citiesFromConfig = configurationManager.getTermCheckerPropertyValue("cities").split(",");
+
+        return Arrays.copyOf(citiesFromConfig, 3);
     }
 
     private NumberFormatter getIntegerFormatter() {

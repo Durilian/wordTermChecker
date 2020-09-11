@@ -1,6 +1,8 @@
 package pl.durilian.wordTermsChecker.utils;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import java.io.IOException;
@@ -9,20 +11,34 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-@Log4j2
+@Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ConfigurationManager {
-    private static final String SELENIDE_PREFIX = "selenide.";
-    private static final String WIREPUSHER_PREFIX = "wirepusher.";
-    private static final String TERMCHECKER_PREFIX = "termchecker.";
 
-    private static final Map<String, String> configuration = createConfiguration();
+    static ConfigurationManager instance = null;
+    Map<String, String> configuration;
+
+    String SELENIDE_PREFIX = "selenide.";
+    String WIREPUSHER_PREFIX = "wirepusher.";
+    String TERMCHECKER_PREFIX = "termchecker.";
+
+    private ConfigurationManager() {
+        configuration = createConfiguration();
+    }
+
+    public static ConfigurationManager getInstance() {
+        if (instance == null) {
+            instance = new ConfigurationManager();
+        }
+        return instance;
+    }
 
     /**
      * Loads properties from configuration that starts with SELENIDE_PREFIX
      *
      * @return Map with key-value pairs of selenide properties
      */
-    public static Map<String, String> getSelenideProperties() {
+    public Map<String, String> getSelenideProperties() {
         Map<String, String> selenideProperties = new HashMap<>();
         for (Map.Entry<String, String> entry : configuration.entrySet()) {
             if (entry.getKey().startsWith(SELENIDE_PREFIX)) {
@@ -38,7 +54,7 @@ public class ConfigurationManager {
      * @param name full name of property e.g. "termchecker.email"
      * @return String value of property
      */
-    public static String getValue(String name) {
+    public String getValue(String name) {
         return configuration.get(name);
     }
 
@@ -48,7 +64,7 @@ public class ConfigurationManager {
      * @param name of selenide property e.g. "timeout"
      * @return String value of property
      */
-    public static String geSelenidePropertyValue(String name) {
+    public String geSelenidePropertyValue(String name) {
         return getValue(SELENIDE_PREFIX + name);
     }
 
@@ -58,7 +74,7 @@ public class ConfigurationManager {
      * @param name of TermChecker property e.g. "cities"
      * @return String value of property
      */
-    public static String getTermCheckerPropertyValue(String name) {
+    public String getTermCheckerPropertyValue(String name) {
         return getValue(TERMCHECKER_PREFIX + name);
 
     }
@@ -69,7 +85,7 @@ public class ConfigurationManager {
      * @param name of wirepusher property e.g. "deviceId"
      * @return String value of property
      */
-    public static String getWirePusherPropertyValue(String name) {
+    public String getWirePusherPropertyValue(String name) {
         return getValue(WIREPUSHER_PREFIX + name);
     }
 
@@ -79,7 +95,7 @@ public class ConfigurationManager {
      * @param name  key of the value
      * @param value
      */
-    public static void setValue(String name, String value) {
+    public void setValue(String name, String value) {
         configuration.put(name, value);
     }
 
@@ -89,7 +105,7 @@ public class ConfigurationManager {
      * @param name  key of the value
      * @param value
      */
-    public static void setTermCheckerPropertyValue(String name, String value) {
+    public void setTermCheckerPropertyValue(String name, String value) {
         setValue(TERMCHECKER_PREFIX + name, value);
     }
 
@@ -99,7 +115,7 @@ public class ConfigurationManager {
      * @param name  key of the value
      * @param value
      */
-    public static void setWirePusherPropertyValue(String name, String value) {
+    public void setWirePusherPropertyValue(String name, String value) {
         setValue(WIREPUSHER_PREFIX + name, value);
     }
 
@@ -108,14 +124,8 @@ public class ConfigurationManager {
      *
      * @return Map with key-value pairs of wirepusher properties
      */
-    public static Map<String, String> getWirePusherProperties() {
-        Map<String, String> wirePusherProperties = new HashMap<>();
-        for (Map.Entry<String, String> entry : configuration.entrySet()) {
-            if (entry.getKey().startsWith(WIREPUSHER_PREFIX)) {
-                wirePusherProperties.put(entry.getKey(), entry.getValue());
-            }
-        }
-        return wirePusherProperties;
+    public Map<String, String> getWirePusherProperties() {
+        return getProperties(WIREPUSHER_PREFIX);
     }
 
     /**
@@ -123,14 +133,24 @@ public class ConfigurationManager {
      *
      * @return Map with key-value pairs of termchecker properties
      */
-    public static Map<String, String> getTermCheckerProperties() {
-        Map<String, String> termCheckerProperties = new HashMap<>();
+    public Map<String, String> getTermCheckerProperties() {
+        return getProperties(TERMCHECKER_PREFIX);
+    }
+
+    /**
+     * Loads properties from configuration that starts with desired prefix
+     *
+     * @param prefix of the property
+     * @return Map with properties
+     */
+    private Map<String, String> getProperties(String prefix) {
+        Map<String, String> properties = new HashMap<>();
         for (Map.Entry<String, String> entry : configuration.entrySet()) {
-            if (entry.getKey().startsWith(TERMCHECKER_PREFIX)) {
-                termCheckerProperties.put(entry.getKey(), entry.getValue());
+            if (entry.getKey().startsWith(prefix)) {
+                properties.put(entry.getKey(), entry.getValue());
             }
         }
-        return termCheckerProperties;
+        return properties;
     }
 
     /**
@@ -138,7 +158,7 @@ public class ConfigurationManager {
      *
      * @return Map with key-value pairs of properties
      */
-    private static Map<String, String> createConfiguration() {
+    private Map<String, String> createConfiguration() {
         final Map<String, String> configuration = new HashMap<>();
 
         loadConfigurationFile("configuration/configuration.properties").forEach((key, value) -> configuration.put((String) key, (String) value));
@@ -152,11 +172,11 @@ public class ConfigurationManager {
      * @param filename path to configuration file in resources
      * @return set of properties
      */
-    private static Properties loadConfigurationFile(String filename) {
+    private Properties loadConfigurationFile(String filename) {
         try {
             return PropertiesLoaderUtils.loadAllProperties(filename);
         } catch (IOException exception) {
-            log.fatal("Could not load configuration from file: {}", filename);
+            log.error("Could not load configuration from file: {}", filename);
             throw new UncheckedIOException(exception);
         }
     }

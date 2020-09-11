@@ -21,7 +21,7 @@ public class TermsChecker {
     final Exam desiredExam;
     final InfoCarAccount account;
     final boolean checkNextMonth;
-    private int poolingTime;
+    int poolingTime;
 
     /**
      * Constructor used for setting data needed for searches
@@ -71,7 +71,9 @@ public class TermsChecker {
                 .start()
                 .login(account.getEmail(), account.getPassword())
                 .goToReservations();
-        while (true) {
+        boolean exit = false;
+        //TODO: find some exit condition
+        while (!exit) {
             for (String city : desiredExam.getCities()) {
                 reservationPage.goToAvailableTerms(city, desiredExam);
                 isAvailableTerm = isAvailableTermInCurrentMonth(city, reservationPage);
