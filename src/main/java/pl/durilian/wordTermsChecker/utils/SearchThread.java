@@ -16,9 +16,7 @@ import pl.durilian.wordTermsChecker.test.WordTest;
  * It is not a thread itself but it contains a thread that is responsible for running searches.
  * Currently application create only 1 search thread and this thread need to be stopped to run new search.
  */
-public class SearchThread implements Runnable {
-    final String name = "searchThread";
-    final Thread thread;
+public class SearchThread extends Thread {
     boolean exit;
     String[] cities;
     String category;
@@ -44,8 +42,7 @@ public class SearchThread implements Runnable {
      */
     public SearchThread(String[] cities, String category, String examType, String email, String
             password, String wirePusherId, int poolingTime, boolean checkNextMonth) {
-        thread = new Thread(this, name);
-        log.info("New thread: " + thread);
+
 
         exit = false;
         this.cities = cities;
@@ -56,6 +53,7 @@ public class SearchThread implements Runnable {
         this.wirePusherId = wirePusherId;
         this.poolingTime = poolingTime;
         this.checkNextMonth = checkNextMonth;
+        this.start();
 
     }
 
@@ -82,7 +80,7 @@ public class SearchThread implements Runnable {
             testSuite.addListener(new TestSuiteListener());
             testSuite.run();
 
-            stop();
+            markToStop();
         }
 
     }
@@ -90,7 +88,7 @@ public class SearchThread implements Runnable {
     /**
      * Sets flag responsible for stopping search
      */
-    public void stop() {
+    public void markToStop() {
         exit = true;
     }
 }

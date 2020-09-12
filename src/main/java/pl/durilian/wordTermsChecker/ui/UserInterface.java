@@ -57,7 +57,6 @@ public class UserInterface extends JFrame {
      * </pre>
      */
     public UserInterface() {
-        createLogsIfNotExist();
         //inits configuration for default values
         Configuration.initTermCheckerProperties();
         Configuration.initWirePusherProperties();
@@ -207,7 +206,6 @@ public class UserInterface extends JFrame {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        clearLogs();
         ActionListener logAction = timerActionLogs();
         new Timer(LOGS_DELAY, logAction).start();
 
@@ -234,7 +232,6 @@ public class UserInterface extends JFrame {
                     textfieldWirePusherID.getText(),
                     Integer.parseInt(textfieldPoolingTime.getText()),
                     checkNextMonth.isSelected());
-            SwingUtilities.invokeLater(searchThread);
         });
 
 
@@ -251,26 +248,13 @@ public class UserInterface extends JFrame {
         });
     }
 
-    private void createLogsIfNotExist() {
-        String today = LocalDate.now().toString();
-        try {
-            Files.readString(Path.of("logs/" + today + "-app.log"));
-        } catch (IOException e) {
-            try {
-                Files.writeString(Path.of("logs/" + today + "-app.log"), "");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        }
-    }
-
     /**
      * Method overwrriting file with todays logs with empty String
      */
     private void clearLogs() {
         try {
             String today = LocalDate.now().toString();
-            Files.writeString(Path.of("logs/" + today + "-app.log"), "");
+            Files.writeString(Path.of("logs/" + today + "-ui.log"), "");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -304,7 +288,7 @@ public class UserInterface extends JFrame {
         return logAction -> {
             try {
                 String today = LocalDate.now().toString();
-                var filePath = Path.of("logs/" + today + "-app.log");
+                var filePath = Path.of("logs/" + today + "-ui.log");
 
                 if (!Files.exists(filePath)) {
                     Files.createFile(filePath);

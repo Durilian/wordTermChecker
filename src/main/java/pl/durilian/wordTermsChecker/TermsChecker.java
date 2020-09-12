@@ -10,6 +10,8 @@ import pl.durilian.wordTermsChecker.pages.LoginPage;
 import pl.durilian.wordTermsChecker.pages.ReservationPage;
 import pl.durilian.wordTermsChecker.services.RestService;
 
+import java.util.Arrays;
+
 @Slf4j
 /**
  * Main class of the project responsible for checking free terms available for desired criterias
@@ -67,6 +69,7 @@ public class TermsChecker {
      */
     public void checkTerm() {
         boolean isAvailableTerm;
+        log.info("Rozpoczynam wyszukiwanie dla miast: " + Arrays.toString(desiredExam.getCities()));
         ReservationPage reservationPage = new LoginPage()
                 .start()
                 .login(account.getEmail(), account.getPassword())
