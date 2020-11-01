@@ -41,7 +41,7 @@ public class ReservationPage extends AbstractBasePage<ReservationPage> {
     int CITY_SELECT_INDEX = 1;
 
     public ReservationPage() {
-        setURI(URI);
+        setUri(URI);
     }
 
     /**

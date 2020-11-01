@@ -10,6 +10,8 @@ import pl.durilian.wordTermsChecker.pages.LoginPage;
 import pl.durilian.wordTermsChecker.pages.ReservationPage;
 import pl.durilian.wordTermsChecker.services.RestService;
 
+import java.util.Arrays;
+
 @Slf4j
 /**
  * Main class of the project responsible for checking free terms available for desired criterias
@@ -21,7 +23,7 @@ public class TermsChecker {
     final Exam desiredExam;
     final InfoCarAccount account;
     final boolean checkNextMonth;
-    private int poolingTime;
+    int poolingTime;
 
     /**
      * Constructor used for setting data needed for searches
@@ -67,11 +69,14 @@ public class TermsChecker {
      */
     public void checkTerm() {
         boolean isAvailableTerm;
+        log.info("Rozpoczynam wyszukiwanie dla miast: " + Arrays.toString(desiredExam.getCities()));
         ReservationPage reservationPage = new LoginPage()
                 .start()
                 .login(account.getEmail(), account.getPassword())
                 .goToReservations();
-        while (true) {
+        boolean exit = false;
+        //TODO: find some exit condition
+        while (!exit) {
             for (String city : desiredExam.getCities()) {
                 reservationPage.goToAvailableTerms(city, desiredExam);
                 isAvailableTerm = isAvailableTermInCurrentMonth(city, reservationPage);

@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class LoginPage extends AbstractBasePage<LoginPage> {
 
-    static String URI = "/oauth2/login";
+    String uri = "/oauth2/login";
 
     //locators
     SelenideElement usernameField = $(byId("username"));
@@ -20,7 +20,7 @@ public class LoginPage extends AbstractBasePage<LoginPage> {
     SelenideElement loginButton = $(byId("register-button"));
 
     public LoginPage() {
-        setURI(URI);
+        setUri(uri);
     }
 
     /**

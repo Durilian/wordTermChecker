@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="WARN" packages="pl.durilian.wordTermsChecker.TermsChecker">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss} %-5level %msg%n" charset="UTF-8"/>
+            <PatternLayout pattern="%d{HH:mm:ss} %c{1} %-5level %msg%n" charset="UTF-8"/>
         </Console>
         <File name="FileLog" fileName="logs/${date:yyyy-MM-dd}-wolneTerminy.log">
             <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss} %-5level %msg%n" charset="UTF-8"/>
@@ -10,15 +10,23 @@
         <File name="FullFileLog" fileName="logs/${date:yyyy-MM-dd}-app.log">
             <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss} %-5level %msg%n" charset="UTF-8"/>
         </File>
+        <File name="UILog" fileName="logs/${date:yyyy-MM-dd}-ui.log">
+            <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss} %c{1} %-5level %msg%n" charset="UTF-8"/>
+        </File>
         <Async name="Async">
             <AppenderRef ref="FileLog"/>
             <AppenderRef ref="FullFileLog"/>
+            <AppenderRef ref="UILog"/>
         </Async>
     </Appenders>
     <Loggers>
+        <Logger name="com.codeborne" level="fatal"/>
+        <Logger name="io.github" level="error"/>
+        <Logger name="pl.durilian.wordTermsChecker.utils" level="warn"/>
         <Root level="info">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="FullFileLog" level="ALL"/>
+            <AppenderRef ref="UILog"/>
             <AppenderRef ref="FileLog" level="error"/>
         </Root>
     </Loggers>

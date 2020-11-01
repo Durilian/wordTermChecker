@@ -1,7 +1,9 @@
 package pl.durilian.wordTermsChecker.entities;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
 
 /**
@@ -9,9 +11,11 @@ import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
  */
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class InfoCarAccount {
-    private String email;
-    private String password;
+
+    String email;
+    String password;
 
     public InfoCarAccount(String email, String password) {
         this.email = email;
@@ -19,8 +23,9 @@ public class InfoCarAccount {
     }
 
     public static InfoCarAccount getInfoCarAccountFromProperties() {
-        String email = ConfigurationManager.getTermCheckerPropertyValue("email");
-        String password = ConfigurationManager.getTermCheckerPropertyValue("password");
+        ConfigurationManager configurationManager = ConfigurationManager.getInstance();
+        String email = configurationManager.getTermCheckerPropertyValue("email");
+        String password = configurationManager.getTermCheckerPropertyValue("password");
 
         return new InfoCarAccount(
                 email,
