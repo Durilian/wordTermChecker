@@ -13,7 +13,6 @@ import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class InfoCarAccount {
-    static ConfigurationManager configurationManager = ConfigurationManager.getInstance();
 
     String email;
     String password;
@@ -24,6 +23,7 @@ public class InfoCarAccount {
     }
 
     public static InfoCarAccount getInfoCarAccountFromProperties() {
+        ConfigurationManager configurationManager = ConfigurationManager.getInstance();
         String email = configurationManager.getTermCheckerPropertyValue("email");
         String password = configurationManager.getTermCheckerPropertyValue("password");
 

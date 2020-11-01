@@ -26,7 +26,7 @@ public class ConfigurationManager {
         configuration = createConfiguration();
     }
 
-    public static ConfigurationManager getInstance() {
+    synchronized public static ConfigurationManager getInstance() {
         if (instance == null) {
             instance = new ConfigurationManager();
         }

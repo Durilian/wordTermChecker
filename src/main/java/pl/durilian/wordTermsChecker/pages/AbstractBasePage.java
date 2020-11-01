@@ -25,7 +25,7 @@ public abstract class AbstractBasePage<T> {
 
     final SelenideElement cookiesAcceptanceButton = $(byId("checkButton"));
 
-    protected String URI;
+    protected String uri;
 
     /**
      * Method accepting cookies if cookies acceptance button is displayed
@@ -48,7 +48,7 @@ public abstract class AbstractBasePage<T> {
     public T start() {
         Configuration.initSelenideProperties();
         log.trace("Uruchamiam przeglądarkę");
-        Selenide.open(baseURL + getURI());
+        Selenide.open(baseURL + getUri());
         acceptCookies();
 
         return (T) this;
@@ -60,7 +60,7 @@ public abstract class AbstractBasePage<T> {
      * @return Pagge object which called this method
      */
     public T open() {
-        Selenide.open(baseURL + getURI());
+        Selenide.open(baseURL + getUri());
         return (T) this;
     }
 }

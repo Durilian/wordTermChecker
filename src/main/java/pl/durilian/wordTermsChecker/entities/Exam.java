@@ -10,7 +10,6 @@ import pl.durilian.wordTermsChecker.utils.ConfigurationManager;
 @Getter
 @Setter
 public class Exam {
-    static ConfigurationManager configurationManager = ConfigurationManager.getInstance();
 
     private String[] cities;
     private String category;
@@ -30,6 +29,7 @@ public class Exam {
     }
 
     public static Exam getExamFromProperties() {
+        ConfigurationManager configurationManager = ConfigurationManager.getInstance();
         String[] cities = configurationManager.getTermCheckerPropertyValue("cities").split(",");
         String category = configurationManager.getTermCheckerPropertyValue("category");
         ExamType examType = ExamType.get(configurationManager.getTermCheckerPropertyValue("examType"));
